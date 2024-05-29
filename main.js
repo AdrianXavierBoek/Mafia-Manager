@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, ipcRenderer } = require("electron");
+const { app, BrowserWindow, Tray, ipcMain, ipcRenderer } = require("electron");
 const path = require("path");
 const fs = require("fs");
 
@@ -31,7 +31,10 @@ function createWindow() {
   })
 }
 
+
 app.on("ready", createWindow);
+
+
 
 
 //recive player data from preloader and write to data.json
