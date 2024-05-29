@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mafia Manager</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Mafia Manager</h1>
+    <button type="button" id="saveButton" onclick="savePlayerData()">Save</button>
+    <button type="button" id="loadButton" onclick="addPlayerToDOM()">Load</button>
+    <div id="player-list" class="player-container">
+      <!-- Player Boxes will be added dynamically here -->
+    </div>
+    <button id="add-player">Add Player</button>
+  </div>
+
+  <script src="frontMain.js"></script>
+</body>
+</html>
