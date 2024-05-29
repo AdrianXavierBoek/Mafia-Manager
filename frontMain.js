@@ -1,14 +1,13 @@
-// Receive initial data from main process
-window.onload = function () {
-  // Receive initial data
-  window.Bridge.receiveInitialData((data) => {
-    data.forEach(player => {
-      addPlayerToDOM(player.name, player.role, player.status);
-    });
-  });
-};
+document.addEventListener("DOMContentLoaded", (event) => {
+  window.Bridge.loadData("initialData", data => {
+    console.log("Initial data loaded")
+    for (let i = 0; i > data.length; i++) {
+      addPlayerToDOM(data[i].name, data[i].role, data[i].status);
+    }
+  })
+});
 
-// Function to add a player to the DOM
+// Function to add a player to the DOM from initial data
 function addPlayerToDOM(name, role, status) {
   var playerList = document.getElementById("player-list");
   var newPlayerBox = document.createElement("div");
@@ -34,7 +33,7 @@ function addPlayerToDOM(name, role, status) {
 }
 
 
-
+//function for saving player data to data.json
 function savePlayerData() {
     let playerBoxes = document.querySelectorAll(".player-box");
     let playerDataArray = [];
@@ -49,6 +48,7 @@ function savePlayerData() {
 
     console.log(playerDataArray)
 
+    //sends player data to preloader
     window.Bridge.saveData(playerDataArray);
 
   }

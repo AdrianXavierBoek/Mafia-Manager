@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain, ipcRenderer } = require("electron");
 const path = require("path");
-const fs = require("fs").promises;
+const fs = require("fs");
 
 //Create main window
 let mainWindow;
@@ -12,26 +12,29 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: true,
-      preload: path.join(__dirname, "preloader.js"), // corrected path
+      preload: path.join(__dirname, "preloader.js"), 
     },
   });
-
-  mainWindow.loadFile("index.html");
-
-  // Load data from data.json and send it to the renderer process
-  fs.readFile("data/data.json", "utf-8")
-    .then((data) => {
-      mainWindow.webContents.send("initialData", JSON.parse(data));
-    })
-    .catch((err) => console.error(err));
 
   mainWindow.on("closed", () => {
     mainWindow = null;
   });
+
+  mainWindow.loadFile("index.html");
+
+  fs.readFile("data/data.json", "utf8", (error, data) => {
+    if (error) {
+      console.error("Could not read JSON data", error)
+    } else {
+      mainWindow.webContents.send("initialData", JSON.parse(data));
+    }
+  })
 }
 
 app.on("ready", createWindow);
 
+
+//recive player data from preloader and write to data.json
 ipcMain.on("saveData", (sender, data) => {
   console.log(data);
   let sData = JSON.stringify(data);

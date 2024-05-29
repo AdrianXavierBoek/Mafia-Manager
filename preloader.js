@@ -1,11 +1,15 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
+// ipcRenderer.on("initialData", (evt, data) => {
+//   console.log(data)
+// })
+
 contextBridge.exposeInMainWorld("Bridge", {
-  // Handler for receiving initial data
-  receiveInitialData: (handler) => {
-    ipcRenderer.on("initialData", (event, data) => handler(data));
+  loadData: (channel, data) => {
+    ipcRenderer.on(channel, (event, ...args) => data(...args))
   },
-  // Handler for saving data
+
+  // sends player data to main process
   saveData: (playerDataArray) => {
     ipcRenderer.send("saveData", playerDataArray);
   }
