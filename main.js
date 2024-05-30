@@ -2,6 +2,8 @@ const { app, BrowserWindow, Tray, ipcMain, ipcRenderer } = require("electron");
 const path = require("path");
 const fs = require("fs");
 
+
+/*
 // Create data directory
 const directoryPath = path.join(__dirname, 'data');
 
@@ -16,7 +18,7 @@ fs.writeFile(filePath, (err) => {
   if (err) throw err;
   console.log('data.json file created successfully!');
 });
-
+*/
 
 //Create main window
 let mainWindow;

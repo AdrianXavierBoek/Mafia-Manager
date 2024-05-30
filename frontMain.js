@@ -18,7 +18,7 @@ function addPlayerToDOM(name, role, status) {
   <input type="text" placeholder="Player Name" value="${name}">
   <select onchange="aliveMafiaCount()">
   <option value="Choose role" ${role === "role" ? "selected" : ""
-    }>Mafia</option>
+    }>Choose role</option>
       <option value="Mafia" ${role === "Mafia" ? "selected" : ""
     }>Mafia</option>
       <option value="Lege" ${role === "Lege" ? "selected" : ""}>Lege</option>
