@@ -1,6 +1,6 @@
 {
   "name": "mafiajs",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "main.js",
   "dependencies": {
     "boolean": "^3.2.0",
