@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", (event) => {
-  window.Bridge.loadData("initialData", data => {
-    console.log("Initial data loaded")
-    for (let i = 0; i > data.length; i++) {
-      addPlayerToDOM(data[i].name, data[i].role, data[i].status);
-    }
+  // Listen for a call from the bridge - this function is called when the main process has loaded data
+  window.Bridge.loadData((event, data) => {
+    data.forEach(player => addPlayerToDOM(player.name, player.role, player.status))
   })
 });
 

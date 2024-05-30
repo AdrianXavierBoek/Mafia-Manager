@@ -1,12 +1,9 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
-// ipcRenderer.on("initialData", (evt, data) => {
-//   console.log(data)
-// })
-
 contextBridge.exposeInMainWorld("Bridge", {
-  loadData: (channel, data) => {
-    ipcRenderer.on(channel, (event, ...args) => data(...args))
+  // This function is called from the main process when data is loaded from the JSON storage
+  loadData: (fn, data) => {
+    ipcRenderer.on('loadData', fn, data)
   },
 
   // sends player data to main process
