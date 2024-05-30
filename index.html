@@ -8,14 +8,20 @@
 </head>
 <body>
   <div class="container">
+    <h6 id="mafiaCount">Maifa alive: </h6>
+    <h6 id="playerCount">Citizens alive:</h6>
     <h1>Mafia Manager</h1>
     <button type="button" id="saveButton" onclick="savePlayerData()">Save</button>
     <div id="player-list" class="player-container">
       <!-- Player Boxes will be added dynamically here -->
     </div>
-    <button id="add-player">Add Player</button>
+    <button id="add-player"  onclick="savePlayerData(); aliveMafiaCount();">Add Player</button>
   </div>
 
   <script src="frontMain.js"></script>
 </body>
 </html>
+
+
+
+
