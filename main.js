@@ -25,7 +25,7 @@ let mainWindow;
 
 // Load saved data from a JSON file
 function loadData() {
-  fs.readFile("data/data.json", "utf8", (err, data) => {
+  fs.readFile("data/data.json", "utf-8", (err, data) => {
     if (err) {
       console.error('Cannot load data', err)
     } else {
