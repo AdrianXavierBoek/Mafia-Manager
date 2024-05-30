@@ -154,7 +154,7 @@ body {
     transition: background-color 0.3s ease;
   }
 
-  button.saveButton{
+  #saveButton{
     margin-bottom: 20px;
   }
 
@@ -180,4 +180,10 @@ body {
 
   .delete-player:hover {
     background-color: #5a0000;
+  }
+
+  h6{
+    font-size: 16px;
+    color: #d8d2bd;
+    margin: 10px;
   }
