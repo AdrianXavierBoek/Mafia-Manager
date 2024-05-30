@@ -1,0 +1,2 @@
+# node_modules should not be committed to the repo
+node_modules/

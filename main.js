@@ -5,6 +5,18 @@ const fs = require("fs");
 //Create main window
 let mainWindow;
 
+// Load saved data from a JSON file
+function loadData() {
+  fs.readFile("data/data.json", "utf8", (err, data) => {
+    if (err) {
+      console.error('Cannot load data', err)
+    } else {
+      // Send the data to the bridge
+      mainWindow.webContents.send("loadData", JSON.parse(data))
+    }
+  })
+}
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1200,
@@ -20,15 +32,10 @@ function createWindow() {
     mainWindow = null;
   });
 
-  mainWindow.loadFile("index.html");
-
-  fs.readFile("data/data.json", "utf8", (error, data) => {
-    if (error) {
-      console.error("Could not read JSON data", error)
-    } else {
-      mainWindow.webContents.send("initialData", JSON.parse(data));
-    }
-  })
+  mainWindow.loadFile("index.html")
+    .then(() => loadData())
+    .then(() => mainWindow.show())
+    .catch(e => console.error('Could not load main window', e))
 }
 
 
