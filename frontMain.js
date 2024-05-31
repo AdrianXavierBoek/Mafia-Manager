@@ -15,22 +15,18 @@ function addPlayerToDOM(name, role, status) {
   var newPlayerBox = document.createElement("div");
   newPlayerBox.classList.add("player-box");
   newPlayerBox.innerHTML = `
-  <input type="text" placeholder="Player Name" value="${name}">
-  <select onchange="aliveMafiaCount()">
-  <option value="Choose role" ${role === "role" ? "selected" : ""
-    }>Choose role</option>
-      <option value="Mafia" ${role === "Mafia" ? "selected" : ""
-    }>Mafia</option>
+  <input type="text" oninput="savePlayerData();" placeholder="Player Name" value="${name}">
+  <select onchange="aliveMafiaCount(); savePlayerData();">
+  <option value="Choose role" ${role === "role" ? "selected" : ""}>Choose role</option>
+      <option value="Mafia" ${role === "Mafia" ? "selected" : ""}>Mafia</option>
       <option value="Lege" ${role === "Lege" ? "selected" : ""}>Lege</option>
-      <option value="Borger" ${role === "Borger" ? "selected" : ""
-    }>Borger</option>
-      <option value="Detektiv" ${role === "Detektiv" ? "selected" : ""
-    }>Detektiv</option>
+      <option value="Borger" ${role === "Borger" ? "selected" : ""}>Borger</option>
+      <option value="Detektiv" ${role === "Detektiv" ? "selected" : ""}>Detektiv</option>
   </select>
   <div class="status-toggle">
       <label>Status:</label>
       <label class="toggle-switch">
-          <input type="checkbox" onchange="aliveMafiaCount()" ${status ? "checked" : ""}>
+          <input type="checkbox" onchange="aliveMafiaCount(); savePlayerData();" ${status ? "checked" : ""}>
           <span class="toggle-slider"></span>
       </label>
   </div>
@@ -47,7 +43,17 @@ function deletePlayer(element) {
   element.parentElement.remove();
   // Call aliveMafiaCount after deleting a player to update the count
   aliveMafiaCount();
+  savePlayerData();
 }
+
+// Add event listener for player deletion
+document.getElementById("player-list").addEventListener("click", function (event) {
+    if (event.target && event.target.className === "delete-player") {
+      event.target.parentElement.remove();
+      // Call aliveMafiaCount after deleting a player to update the count
+      aliveMafiaCount();
+    }
+  });
 
 //function for saving player data to data.json
 function savePlayerData() {
@@ -123,8 +129,8 @@ document.getElementById("add-player").addEventListener("click", function () {
   var newPlayerBox = document.createElement("div");
   newPlayerBox.classList.add("player-box");
   newPlayerBox.innerHTML = `
-  <input type="text" placeholder="Player Name" name="spillerNavn${playerCount}">
-  <select onchange="aliveMafiaCount()">
+  <input type="text" oninput="savePlayerData();" placeholder="Player Name" name="spillerNavn${playerCount}">
+  <select onchange="aliveMafiaCount(); savePlayerData();">
       <option value="Choose role">Choose role</option>
       <option value="Mafia">Mafia</option>
       <option value="Lege">Lege</option>
@@ -134,7 +140,7 @@ document.getElementById("add-player").addEventListener("click", function () {
   <div class="status-toggle">
       <label>Status:</label>
       <label class="toggle-switch">
-          <input type="checkbox" onchange="aliveMafiaCount()">
+          <input type="checkbox" onchange="aliveMafiaCount(); savePlayerData();">
           <span class="toggle-slider"></span>
       </label>
   </div>
@@ -149,13 +155,3 @@ document.getElementById("add-player").addEventListener("click", function () {
   savePlayerData(); 
 });
 
-// Add event listener for player deletion
-document
-  .getElementById("player-list")
-  .addEventListener("click", function (event) {
-    if (event.target && event.target.className === "delete-player") {
-      event.target.parentElement.remove();
-      // Call aliveMafiaCount after deleting a player to update the count
-      aliveMafiaCount();
-    }
-  });
