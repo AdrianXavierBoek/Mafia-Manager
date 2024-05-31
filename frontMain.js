@@ -146,6 +146,7 @@ document.getElementById("add-player").addEventListener("click", function () {
 
   // Call aliveMafiaCount after deleting a player to update the count
   aliveMafiaCount();
+  savePlayerData(); 
 });
 
 // Add event listener for player deletion
