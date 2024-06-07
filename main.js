@@ -4,19 +4,25 @@ const fs = require("fs");
 
 
 
-// Create data directory
+// Ensure the directory exists, creating any nested directories as necessary
 const directoryPath = path.join(__dirname, 'data');
 
-if (!fs.existsSync(directoryPath)){
-  fs.mkdirSync(directoryPath);
+try {
+  fs.mkdirSync(directoryPath, { recursive: true });
+  console.log('Directory created or already exists:', directoryPath);
+} catch (err) {
+  console.error('Error creating directory:', err);
 }
 
 // Create data file
 const filePath = path.join(directoryPath, 'data.json');
-const fileContent = '[]'
+const fileContent = '[]';
 
 fs.writeFile(filePath, fileContent, (err) => {
-  if (err) throw err;
+  if (err) {
+    console.error('Error writing file:', err);
+    return;
+  }
   console.log('data.json file created successfully!');
 });
 
