@@ -115,10 +115,14 @@ function aliveMafiaCount() {
   
 
   // Update the mafia and player count in the HTML
-  var Mcount = document.getElementById("mafiaCount");
-  Mcount.innerHTML = `<h6 id="mafiaCount">Mafia alive: ${mafiaCount}</h6>`;
-  var Pcount = document.getElementById("playerCount");
-  Pcount.innerHTML = `<h6 id="playerCount">Citizens alive: ${citizens}</h6>`;
+  if (mafiaCount != null) {
+    var Mcount = document.getElementById("mafiaCount");
+    Mcount.textContent = "Mafia alive: " + mafiaCount;
+    Mcount.style.display = "block";
+    var Pcount = document.getElementById("playerCount");
+    Pcount.textContent = "Citizens alive: " + citizens;
+    Pcount.style.display = "block";
+  }
 }
 
 var playerCount = 1; // Initial player count
@@ -137,7 +141,7 @@ document.getElementById("add-player").addEventListener("click", function () {
       <option value="Borger">Borger</option>
       <option value="Detektiv">Detektiv</option>
   </select>
-  <div class="status-toggle">
+  <div class="status-toggle gap-1">
       <label>Status:</label>
       <label class="toggle-switch">
           <input type="checkbox" onchange="aliveMafiaCount(); savePlayerData();">
