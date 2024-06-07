@@ -3,15 +3,10 @@ const path = require("path");
 const fs = require("fs");
 
 
-
-// Ensure the directory exists, creating any nested directories as necessary
-const directoryPath = path.join(__dirname, 'data');
-
-try {
-  fs.mkdirSync(directoryPath, { recursive: true });
-  console.log('Directory created or already exists:', directoryPath);
-} catch (err) {
-  console.error('Error creating directory:', err);
+// With checking if dir already exists
+const directoryPath = '/AppData/Local/Programs/mafiajs/data';
+if (!fs.existsSync(directoryPath)) {
+  fs.mkdirSync(directoryPath);
 }
 
 // Create data file
@@ -19,12 +14,10 @@ const filePath = path.join(directoryPath, 'data.json');
 const fileContent = '[]';
 
 fs.writeFile(filePath, fileContent, (err) => {
-  if (err) {
-    console.error('Error writing file:', err);
-    return;
-  }
+  if (err) throw err;
   console.log('data.json file created successfully!');
 });
+
 
 //Create main window
 let mainWindow;
