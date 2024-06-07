@@ -1,12 +1,16 @@
 const { app, BrowserWindow, Tray, ipcMain, ipcRenderer } = require("electron");
-const path = require("path");
-const fs = require("fs");
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
+// Get the home directory of the current user
+const homeDirectory = os.homedir();
 
-// With checking if dir already exists
-const directoryPath = '/AppData/Local/Programs/mafiajs/data';
+// Construct the directory path within the user's home directory
+const directoryPath = path.join(homeDirectory, 'AppData', 'Local', 'Programs', 'mafiajs', 'data');
 if (!fs.existsSync(directoryPath)) {
-  fs.mkdirSync(directoryPath);
+  // The 'recursive: true' option creates the directory path if any directories in the path do not exist
+  fs.mkdirSync(directoryPath, { recursive: true });
 }
 
 // Create data file
