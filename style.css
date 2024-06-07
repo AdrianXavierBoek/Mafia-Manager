@@ -1,3 +1,5 @@
+@import url('https://cdn-uicons.flaticon.com/2.4.0/uicons-solid-rounded/css/uicons-solid-rounded.css');
+
 body {
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -13,6 +15,8 @@ body {
     flex-direction: column;
     max-width: 100%;
     padding: 1rem;
+    min-height: 100svh;
+    justify-content: center;
   }
 
   .container {
@@ -29,7 +33,7 @@ body {
   }
 
   h1 {
-    font-size: 24px;
+    font-size: 2.5em;
     text-align: center;
     color: #ffcc00;
     margin-block-start: .0rem;
@@ -39,17 +43,24 @@ body {
   .player-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: .75rem;
   }
 
   .player-box {
-    background-color: #555;
-    padding: 20px;
-    padding-bottom: 40px;
+    background-color: #202020;
+    padding: .5rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(255 255 255 / 14%);
     border-radius: 5px;
     animation: fadeIn 0.5s ease-in-out;
     position: relative;
     /* Ensure relative positioning */
+    box-shadow: 0px 18px 20px 2px #00000029;
+  }
+
+  .player-box:hover .delete-player {
+    opacity: 1;
   }
 
   @keyframes fadeIn {
@@ -65,7 +76,7 @@ body {
   }
 
   input[type="text"] {
-    width: calc(100% - 20px);
+    width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -78,7 +89,7 @@ body {
   }
 
   select {
-    width: calc(100% - 20px);
+    width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
@@ -94,14 +105,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: absolute;
-    /* Position toggle switch */
-    margin: -30px;
-    margin-left: 60;
-    bottom: 40px;
-    /* Adjust as needed */
-    left: 50px;
-    /* Adjust as needed */
   }
 
   .status-toggle label {
@@ -123,8 +126,11 @@ body {
   .toggle-slider {
     width: 100%;
     height: 100%;
-    background-color: #8b0000;
-    border-radius: 15px;
+    background-color: #00ff5638;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #00ff55;
+    border-radius: 4px;
     position: absolute;
     top: 0;
     left: 0;
@@ -143,8 +149,8 @@ body {
   }
 
   .toggle-switch input:checked + .toggle-slider {
-    transform: translateX(100%);
-    background-color: #5a0000;
+    background-color: #ff000038;
+    border-color: #ff0000;
   }
 
   .toggle-switch input:checked + .toggle-slider:before {
@@ -175,19 +181,22 @@ body {
   }
 
   .delete-player {
-    padding: 5px 10px;
+    padding: 0.5rem;
     border: none;
     border-radius: 3px;
-    margin: 17px;
+    margin: 2px;
     background-color: #8b0000;
     color: white;
     font-size: 14px;
     cursor: pointer;
     outline: none;
     position: absolute;
-    top: 10px;
-    right: 10px;
-    transition: background-color 0.3s ease;
+    top: 0.1rem;
+    right: 0.1rem;
+    transition: background-color 0.3s ease, opacity 0.1s ease;
+    display: flex;
+    align-items: center;
+    opacity: 0;
   }
 
   .delete-player:hover {
@@ -220,6 +229,15 @@ body {
 
   .gap-3 {
     gap: 3rem;
+  }
+
+  .position-absolute {
+    position: absolute;
+  }
+
+  i {
+    width: 1rem;
+    height: 1rem;
   }
 
   /* Small devices (phones) */
