@@ -14,14 +14,15 @@ if (!fs.existsSync(directoryPath)) {
 }
 
 // Create data file
-const filePath = path.join(directoryPath, 'data.json');
-const fileContent = '[]';
+if(!fs.existsSync(directoryPath, 'data.json')){
+  const filePath = path.join(directoryPath, 'data.json');
+  const fileContent = '[]';
 
-fs.writeFile(filePath, fileContent, (err) => {
-  if (err) throw err;
-  console.log('data.json file created successfully!');
-});
-
+  fs.writeFile(filePath, fileContent, (err) => {
+    if (err) throw err;
+    console.log('data.json file created successfully!');
+  });
+}
 
 //Create main window
 let mainWindow;
