@@ -1,30 +1,28 @@
 const { app, BrowserWindow, Tray, ipcMain, ipcRenderer } = require("electron");
-const path = require("path");
-const fs = require("fs");
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 
+// Get the home directory of the current user
+const homeDirectory = os.homedir();
 
-
-// Ensure the directory exists, creating any nested directories as necessary
-const directoryPath = path.join(__dirname, 'data');
-
-try {
+// Construct the directory path within the user's home directory
+const directoryPath = path.join(homeDirectory, 'AppData', 'Local', 'Programs', 'mafiajs', 'data');
+if (!fs.existsSync(directoryPath)) {
+  // The 'recursive: true' option creates the directory path if any directories in the path do not exist
   fs.mkdirSync(directoryPath, { recursive: true });
-  console.log('Directory created or already exists:', directoryPath);
-} catch (err) {
-  console.error('Error creating directory:', err);
 }
 
 // Create data file
-const filePath = path.join(directoryPath, 'data.json');
-const fileContent = '[]';
+if(!fs.existsSync(directoryPath, 'data.json')){
+  const filePath = path.join(directoryPath, 'data.json');
+  const fileContent = '[]';
 
-fs.writeFile(filePath, fileContent, (err) => {
-  if (err) {
-    console.error('Error writing file:', err);
-    return;
-  }
-  console.log('data.json file created successfully!');
-});
+  fs.writeFile(filePath, fileContent, (err) => {
+    if (err) throw err;
+    console.log('data.json file created successfully!');
+  });
+}
 
 //Create main window
 let mainWindow;
