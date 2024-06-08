@@ -231,7 +231,7 @@ body {
     gap: 3rem;
   }
 
-  .position-absolute {
+  .game-metrix-wrapper {
     position: absolute;
   }
 
@@ -246,6 +246,11 @@ body {
       font-size: 14px;
     }
 
+    .game-metrix-wrapper {
+      position: relative;
+      text-align: center;
+    }
+
     .player-container {
       grid-template-columns: repeat(1, 1fr);
     }
@@ -256,6 +261,11 @@ body {
   @media (min-width: 576px) and (max-width: 768px) {
     body {
       font-size: 15px;
+    }
+
+    .game-metrix-wrapper {
+      position: relative;
+      text-align: center;
     }
 
     .player-container {
