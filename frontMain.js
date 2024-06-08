@@ -15,8 +15,8 @@ function addPlayerToDOM(name, role, status) {
   var newPlayerBox = document.createElement("div");
   newPlayerBox.classList.add("player-box");
   newPlayerBox.innerHTML = `
-  <input type="text" oninput="savePlayerData();" placeholder="Player Name" value="${name}">
-  <select onchange="aliveMafiaCount(); savePlayerData();">
+  <input type="text" tabindex="1" oninput="savePlayerData();" placeholder="Player Name" value="${name}">
+  <select tabindex="2" onchange="aliveMafiaCount(); savePlayerData();">
   <option value="Choose role" ${role === "role" ? "selected" : ""}>Choose role</option>
       <option value="Mafia" ${role === "Mafia" ? "selected" : ""}>Mafia</option>
       <option value="Lege" ${role === "Lege" ? "selected" : ""}>Lege</option>
@@ -133,8 +133,8 @@ document.getElementById("add-player").addEventListener("click", function () {
   var newPlayerBox = document.createElement("div");
   newPlayerBox.classList.add("player-box");
   newPlayerBox.innerHTML = `
-  <input type="text" oninput="savePlayerData();" placeholder="Player Name" name="spillerNavn${playerCount}">
-  <select onchange="aliveMafiaCount(); savePlayerData();">
+  <input type="text" tabindex="1" oninput="savePlayerData();" placeholder="Player Name" name="spillerNavn${playerCount}">
+  <select tabindex="2" onchange="aliveMafiaCount(); savePlayerData();">
       <option value="Choose role">Choose role</option>
       <option value="Mafia">Mafia</option>
       <option value="Lege">Lege</option>
