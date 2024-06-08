@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings Page</title>
+    <link rel="stylesheet" href="Styles/Settings.css">
+</head>
+<body>
+    <h1>Settings</h1>
+
+    <h2>Data Management</h2>
+    <button class="button" id="export" onclick="exportData()">Export Data</button>
+    <button class="button" id="import" onclick="importData()">Import Data</button>
+
+    <h2>Custom Role</h2>
+    <div class="custom-role">
+        <input type="text" id="role-name" placeholder="Role Name">
+        <button class="button" id="add-role" onclick="addRole()">Add Role</button>
+    </div>
+
+    <h2>Theme</h2>
+    <button class="button" id="light-theme" onclick="toggleLightTheme()">Light Theme</button>
+</body>
+</html>

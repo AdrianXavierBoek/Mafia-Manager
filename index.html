@@ -4,9 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mafia Manager</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="Styles/style.css">
 </head>
 <body>
+
+  <!-- hamburger menu-->
+  <button class="hamburger-menu" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </button>
+  
+  <div id="myMenu" class="menu">
+    <!-- Add your menu items here -->
+    <a href="#" onclick="toggleSettings();">Settings</a>
+    <a href="#">Help</a>
+  </div>
+
+
   <section class="section">
     <container class="container">
       <div class="flex-vertical gap-1">

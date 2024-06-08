@@ -283,3 +283,67 @@ body {
       grid-template-columns: repeat(4, 1fr);
     }
   }
+
+  .hamburger-container {
+    position: relative;
+  }
+
+
+  .hamburger-menu {
+    position: fixed; /* Fix position to the top left corner */
+    top: 10px; /* Adjust as needed */
+    left: 10px; /* Adjust as needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10; /* Ensure it sits over other content */
+  }
+  
+  .bar {
+    width: 2rem;
+    height: 0.25rem;
+    background-color: #be1c1c;
+    border-radius: 10px;
+    transition: 0.3s;
+    margin-left: 0.25rem;
+  }
+  
+  /* The menu */
+  .menu {
+    display: absolute; /* Hidden by default */
+    position: absolute; /* Stay in place */
+    z-index: 9; /* Sit on top */
+    left: 10px;
+    top: 5rem;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.5s, transform 0.5s;
+    display: none;
+    width: auto; /* Only as wide as its contents */
+    height: auto; /* Only as tall as its contents */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    border-radius: 10px;
+  }
+  
+  .menu a {
+    display: block;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+  }
+
+  /* When the menu is visible */
+  .menu.show {
+    opacity: 1; /* Fully visible */
+    transform: translateY(0); /* Final position */
+    display: block; /* Now visible */
+  }
+

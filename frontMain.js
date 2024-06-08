@@ -159,3 +159,22 @@ document.getElementById("add-player").addEventListener("click", function () {
   savePlayerData(); 
 });
 
+
+function toggleMenu() {
+  var menu = document.getElementById("myMenu");
+  if (menu.style.display === "none") {
+    menu.style.display = "block";
+  } else {
+    menu.style.display = "none";
+  }
+}
+
+document.querySelector('.hamburger-menu').addEventListener('click', function() {
+  toggleMenu(); // Call the toggleMenu function
+  document.querySelector('.menu').classList.toggle('show');
+});
+
+function toggleSettings() {
+  console.log("Settings button clicked");
+  window.Bridge.SettingsPage();
+}

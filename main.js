@@ -85,3 +85,20 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+
+//make settings window when pressing settings button
+ipcMain.on("SettingsPage", () => {
+  let settingsWindow = new BrowserWindow({
+    width: 1200,
+    height: 720,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: true,
+      preload: path.join(__dirname, "preloader.js"),
+    },
+  });
+
+  settingsWindow.loadFile("settings.html");
+  settingsWindow.show();
+});

@@ -9,5 +9,10 @@ contextBridge.exposeInMainWorld("Bridge", {
   // sends player data to main process
   saveData: (playerDataArray) => {
     ipcRenderer.send("saveData", playerDataArray);
+  },
+
+  // opens the settings page in the main process
+  SettingsPage: () => {
+    ipcRenderer.send("SettingsPage");
   }
 });
