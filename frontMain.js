@@ -30,7 +30,7 @@ function addPlayerToDOM(name, role, status) {
           <span class="toggle-slider"></span>
       </label>
   </div>
-  <button class="delete-player" onclick="deletePlayer(this); aliveMafiaCount();">Delete</button>
+  <button class="delete-player" onclick="deletePlayer(this); aliveMafiaCount();"><i class="fi fi-sr-trash"></i></button>
 `;
   playerList.appendChild(newPlayerBox);
 
@@ -148,7 +148,7 @@ document.getElementById("add-player").addEventListener("click", function () {
           <span class="toggle-slider"></span>
       </label>
   </div>
-  <button class="delete-player" onclick="deletePlayer(this); aliveMafiaCount();">Delete</button>
+  <button class="delete-player" onclick="deletePlayer(this); aliveMafiaCount();"><i class="fi fi-sr-trash"></i></button>
   `;
   playerList.appendChild(newPlayerBox);
 
