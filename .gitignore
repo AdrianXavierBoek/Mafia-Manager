@@ -1,4 +1,4 @@
 # node_modules should not be committed to the repo
+data/
 node_modules/
 dist/
-data/

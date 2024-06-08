@@ -6,13 +6,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
     );
     // Call aliveMafiaCount after loading data to update the count
     aliveMafiaCount();
+    reorderPlayers();
   });
 });
 
 // Function to add a player to the DOM from initial data
 function addPlayerToDOM(name, role, status) {
-  var playerList = document.getElementById("player-list");
-  var newPlayerBox = document.createElement("div");
+  const playerList = document.getElementById("player-list");
+  const newPlayerBox = document.createElement("div");
   newPlayerBox.classList.add("player-box");
   newPlayerBox.innerHTML = `
   <input type="text" oninput="savePlayerData();" placeholder="Player Name" value="${name}">
@@ -26,16 +27,20 @@ function addPlayerToDOM(name, role, status) {
   <div class="status-toggle">
       <label>Status:</label>
       <label class="toggle-switch">
-          <input type="checkbox" onchange="aliveMafiaCount(); savePlayerData();" ${status ? "checked" : ""}>
+          <input type="checkbox" onchange="toggleStatus(this); aliveMafiaCount(); savePlayerData(); reorderPlayers();" ${status ? "checked" : ""}>
           <span class="toggle-slider"></span>
       </label>
   </div>
-  <button class="delete-player" onclick="deletePlayer(this); aliveMafiaCount();"><i class="fi fi-sr-trash"></i></button>
+  <button class="delete-player" onclick="deletePlayer(this); aliveMafiaCount(); reorderPlayers();"><i class="fi fi-sr-trash"></i></button>
 `;
   playerList.appendChild(newPlayerBox);
 
+  // Remove the fade-in class after animation ends
+  setTimeout(() => newPlayerBox.classList.remove('fade-in'), 500);
+  
   // Call aliveMafiaCount after adding a player to update the count
   aliveMafiaCount();
+  reorderPlayers();
 }
 
 // Function to handle player deletion
@@ -44,6 +49,7 @@ function deletePlayer(element) {
   // Call aliveMafiaCount after deleting a player to update the count
   aliveMafiaCount();
   savePlayerData();
+  reorderPlayers();
 }
 
 // Add event listener for player deletion
@@ -52,6 +58,7 @@ document.getElementById("player-list").addEventListener("click", function (event
       event.target.parentElement.remove();
       // Call aliveMafiaCount after deleting a player to update the count
       aliveMafiaCount();
+      reorderPlayers();
     }
   });
 
@@ -131,7 +138,7 @@ var playerCount = 1; // Initial player count
 document.getElementById("add-player").addEventListener("click", function () {
   var playerList = document.getElementById("player-list");
   var newPlayerBox = document.createElement("div");
-  newPlayerBox.classList.add("player-box");
+  newPlayerBox.classList.add("player-box", "fade-in");
   newPlayerBox.innerHTML = `
   <input type="text" oninput="savePlayerData();" placeholder="Player Name" name="spillerNavn${playerCount}">
   <select onchange="aliveMafiaCount(); savePlayerData();">
@@ -144,18 +151,53 @@ document.getElementById("add-player").addEventListener("click", function () {
   <div class="status-toggle gap-1">
       <label>Status:</label>
       <label class="toggle-switch">
-          <input type="checkbox" onchange="aliveMafiaCount(); savePlayerData();">
+          <input type="checkbox" onchange="toggleStatus(this); reorderPlayers(); aliveMafiaCount(); savePlayerData(); ">
           <span class="toggle-slider"></span>
       </label>
   </div>
-  <button class="delete-player" onclick="deletePlayer(this); aliveMafiaCount();"><i class="fi fi-sr-trash"></i></button>
+  <button class="delete-player" onclick="deletePlayer(this); aliveMafiaCount(); reorderPlayers();"><i class="fi fi-sr-trash"></i></button>
   `;
-  playerList.appendChild(newPlayerBox);
+  playerList.insertBefore(newPlayerBox, playerList.firstChild);
 
   playerCount++; // Increment player count for the next player
 
+  // Remove the fade-in class after animation ends
+  setTimeout(() => newPlayerBox.classList.remove('fade-in'), 500);
+
   // Call aliveMafiaCount after deleting a player to update the count
+  reorderPlayers();
   aliveMafiaCount();
   savePlayerData(); 
 });
 
+// Function to reorder players based on their status (alive or dead)
+function reorderPlayers() {
+  console.log("Reorder players is called");
+  const playerList = document.getElementById("player-list");
+  const playerBoxes = Array.from(playerList.children);
+
+  playerBoxes.sort((a, b) => {
+    const aStatus = a.querySelector("input[type='checkbox']").checked;
+    const bStatus = b.querySelector("input[type='checkbox']").checked;
+    return aStatus - bStatus;
+  });
+
+  console.log('Reordering players:', playerBoxes.map(box => ({
+    name: box.querySelector("input[type='text']").value,
+    status: box.querySelector("input[type='checkbox']").checked
+  })));
+
+  // Append the reordered player boxes without the fade-in class
+  playerBoxes.forEach(box => playerList.appendChild(box));
+}
+
+function toggleStatus(checkbox) {
+  const playerBox = checkbox.closest('.player-box');
+  if (checkbox.checked) { // If the player is marked as dead
+    playerBox.classList.add('fade-in');
+    setTimeout(() => playerBox.classList.remove('fade-in'), 500); // Remove fade-in after animation ends
+  }
+  aliveMafiaCount();
+  reorderPlayers();
+  savePlayerData();
+}
