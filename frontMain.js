@@ -17,8 +17,8 @@ function addPlayerToDOM(name, role, status) {
   newPlayerBox.classList.add("player-box");
   newPlayerBox.innerHTML = `
   <input type="text" oninput="savePlayerData();" placeholder="Player Name" value="${name}">
-  <select onchange="aliveMafiaCount(); savePlayerData();">
-  <option value="Choose role" ${role === "role" ? "selected" : ""}>Choose role</option>
+  <select id="roleSelect" onchange="aliveMafiaCount(); savePlayerData();">
+      <option value="Choose role" ${role === "role" ? "selected" : ""}>Choose role</option>
       <option value="Mafia" ${role === "Mafia" ? "selected" : ""}>Mafia</option>
       <option value="Lege" ${role === "Lege" ? "selected" : ""}>Lege</option>
       <option value="Borger" ${role === "Borger" ? "selected" : ""}>Borger</option>
@@ -141,7 +141,7 @@ document.getElementById("add-player").addEventListener("click", function () {
   newPlayerBox.classList.add("player-box", "fade-in");
   newPlayerBox.innerHTML = `
   <input type="text" oninput="savePlayerData();" placeholder="Player Name" name="spillerNavn${playerCount}">
-  <select onchange="aliveMafiaCount(); savePlayerData();">
+  <select id="roleSelect" onchange="aliveMafiaCount(); savePlayerData();">
       <option value="Choose role">Choose role</option>
       <option value="Mafia">Mafia</option>
       <option value="Lege">Lege</option>
@@ -200,4 +200,29 @@ function toggleStatus(checkbox) {
   aliveMafiaCount();
   reorderPlayers();
   savePlayerData();
+}
+
+let showRoles = true;
+function hideRolesToggle() {
+  let roleElements = document.querySelectorAll('#roleSelect');
+
+  let element = document.querySelector('#hide-roles');
+  let hiddenIcon = element.querySelector('.hide');
+  let shownIcon = element.querySelector('.show');
+
+  function iconToggle() {
+    shownIcon.classList.remove('show');
+    shownIcon.classList.add('hide');
+    hiddenIcon.classList.remove('hide');
+    hiddenIcon.classList.add('show');
+  }
+  if (showRoles === true) {
+    showRoles = false;
+    iconToggle();
+    roleElements.forEach((el) => el.classList.add('hide'));
+  } else {
+    showRoles = true;
+    iconToggle();
+    roleElements.forEach((el) => el.classList.remove('hide'));
+  }
 }

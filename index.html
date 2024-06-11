@@ -8,9 +8,13 @@
 </head>
 <body>
   <section class="section">
-    <container class="container">
+    <container class="container position-relative">
       <div class="flex-vertical gap-1">
         <h1>Mafia Manager</h1>
+        <div id="hide-roles" onclick="hideRolesToggle()" class="button-small position-absolute top-right">
+          <i class="fi fi-sr-eye-crossed show"></i>
+          <i class="fi fi-sr-eye hide"></i>
+        </div>
         <div class="flex-vertical gap-05 game-metrix-wrapper">
           <h6 class="start-text" id="mafiaCount">Maifa alive: </h6>
           <h6 class="start-text" id="playerCount">Citizens alive:</h6>
